@@ -1,5 +1,6 @@
 float[] carA = {100, 100};
 float[] carB = {200,50};
+float[] carC = {200, 200};
 
 float[] car_to_polar (float[] input) {
   float r = dist(0, 0, input[0], input[1]);
@@ -26,6 +27,7 @@ float[] mfmrotate (float[] from, float rad, float r) {
 void point_polar (float[] polar) {
   float[] car = polar_to_car(polar);
   point(car[0], car[1]);
+  // circle(car[0], car[1], 2);
 }
 
 
@@ -43,5 +45,17 @@ void setup(){
   point_polar(polB);
   for (int i = 0; i < 120; ++i) {
     point_polar(mfmrotate(polA, radians(i), 10));
+  }
+
+  for (int i = 0; i < 360; ++i) {
+    point_polar(mfmrotate(
+      mfmrotate(
+        car_to_polar(carC),
+        2.0 * PI * ((float)i/360) * (-2.0), 
+        14
+      ),
+      2.0 * PI * ((float)i/360), 
+      50
+    ));
   }
 }
