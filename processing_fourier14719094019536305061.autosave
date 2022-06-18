@@ -15,11 +15,8 @@ float[] polar_to_car (float[] input) {
 float[] mfmrotate (float[] from, float rad, float r) {
   // float to_r = sqrt(sq(from[0]) + sq(r) - 2 * r * from[0] * cos(rad));
   // float to_rad = asin((r * sin(rad)) / to_r) + from[1];
-  float[] carfrom = polar_to_car(from);
-  float cartox = carfrom[0] + r * cos(rad);
-  float cartoy = carfrom[1] + r * sin(rad);
-  float[] carto = {cartox, cartoy};
-  float[] to = car_to_polar(carto);
+  
+  float[] to = {to_r, to_rad};
   return to;
 }
 
