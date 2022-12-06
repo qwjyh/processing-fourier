@@ -13,12 +13,15 @@ float[] polar_to_car (float[] input) {
   return output;
 }
 
+// draw a polar point
 void point_polar (float[] polar) {
   float[] car = polar_to_car(polar);
   point(car[0], car[1]);
   // circle(car[0], car[1], 2);
 }
 
+// draw a line and point from polar point `from`
+// rad is diff from current `from`, r is distance from `from`
 float[] mfmrotate (float[] from, float rad, float r) {
   // float to_r = sqrt(sq(from[0]) + sq(r) - 2 * r * from[0] * cos(rad));
   // float to_rad = asin((r * sin(rad)) / to_r) + from[1];
@@ -65,30 +68,6 @@ void setup(){
   for (int i = 0; i < 120; ++i) {
     point_polar(mfmrotate(polA, radians(i), 10));
   }
-
-  // point_polar(mfmrotate(
-  //   car_to_polar(carC),
-  //   radians(0),
-  //   200,
-  //   true
-  // ));
-  // point_polar(mfmrotate(
-  //   car_to_polar(carC),
-  //   radians(60),
-  //   200,
-  //   true
-  // ));
-  // point_polar(mfmrotate(
-  //   mfmrotate(
-  //     car_to_polar(carC),
-  //     radians(60),
-  //     200,
-  //     true
-  //   ),
-  //   radians(60),
-  //   100,
-  //   true
-  // ));
 
   for (int i = 0; i < 360; ++i) {
     point_polar(mfmrotate(
