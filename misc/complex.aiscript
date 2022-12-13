@@ -1,0 +1,31 @@
+var complex = {
+  print: @(c) {
+    if (c.imag >= 0) {
+      <: `{c.real}+{c.imag}i`
+    } else {
+      <: `{c.real}{c.imag}i`
+    }
+  },
+  new: @(real, imag) {
+    {
+      real: real,
+      imag: imag,
+    }
+  },
+  add: @(c1, c2) {
+    complex.new(c1.real + c2.real, c1.imag + c2.imag)
+  },
+  sub: @(c1, c2) {
+    complex.new(c1.real - c2.real, c1.imag - c2.imag)
+  },
+  mul: @(c1, c2) {
+    complex.new(c1.real * c2.real - c1.imag * c2.imag, c1.real * c2.imag + c1.imag * c2.real)
+  },
+}
+
+var c1 = complex.new(1, 2)
+<: complex.print(c1)
+var c2 = complex.new(2, 3)
+<: complex.print(c2)
+<: complex.print(complex.mul(c1, c2))
+
