@@ -1,0 +1,53 @@
+<: Core:v
+
+// basic constants
+#null = Str:to_num(Core:ai)
+<: null
+#false = (1 > 1)
+#true = (1 = 1)
+
+// complex algebra
+#complex = {
+  print: @(c) {
+    // type check
+    ? ((c.real = null) | (c.imag = null)) {
+      <: `{c} is not a complex number`
+      false
+    } .? (c.imag >= 0) {
+      <: `{c.real}+{c.imag}i`
+      true
+    } . {
+      <: `{c.real}{c.imag}i`
+      true
+    }
+  },
+  new: @(real, imag) {
+    {
+      real: real,
+      imag: imag,
+    }
+  },
+  add: @(c1, c2) {
+    complex.new(c1.real + c2.real, c1.imag + c2.imag)
+  },
+  sub: @(c1, c2) {
+    complex.new(c1.real - c2.real, c1.imag - c2.imag)
+  },
+  mul: @(c1, c2) {
+    complex.new(((c1.real * c2.real) - (c1.imag * c2.imag)), ((c1.real * c2.imag) + (c1.imag * c2.real)))
+  },
+}
+
+
+// testing
+$c1 <- complex.new(1, 2)
+complex.print(c1)
+$c2 <- complex.new(2, 3)
+complex.print(c2)
+complex.print(complex.mul(c1, c2))
+
+<: Core:type(c1)
+<: ""
+
+$c3 <- {}
+<: complex.print(c3)
