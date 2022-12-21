@@ -10,7 +10,9 @@
 #complex = {
   print: @(c) {
     // type check
-    ? ((c.real = null) | (c.imag = null)) {
+    ? (Core:type(c) != "obj") {
+      <: `{c} is not a complex number (not obj)`
+    } .? ((c.real = null) | (c.imag = null)) {
       <: `{c} is not a complex number`
       false
     } .? (c.imag >= 0) {
@@ -49,5 +51,8 @@ complex.print(complex.mul(c1, c2))
 <: Core:type(c1)
 <: ""
 
-$c3 <- {}
+$c3 <- "a"
 <: complex.print(c3)
+
+(Core:type(Core:ai) != "obj")
+
